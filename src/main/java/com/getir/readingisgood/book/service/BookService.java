@@ -2,8 +2,10 @@ package com.getir.readingisgood.book.service;
 
 import com.getir.readingisgood.book.entity.Book;
 import com.getir.readingisgood.book.repository.BookRepository;
-import com.getir.readingisgood.book.service.checker.BookStockAmountChecker;
+import com.getir.readingisgood.book.service.checker.BookChecker;
 import lombok.RequiredArgsConstructor;
+import org.redisson.Redisson;
+import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,7 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class BookService {
 
     private final BookRepository bookRepository;
-    private final BookStockAmountChecker bookStockAmountChecker;
+    private final BookChecker bookChecker;
+
+    private final RedissonClient client = Redisson.create();
 
     @Transactional
     public void add(Book book) {
@@ -22,16 +26,16 @@ public class BookService {
     @Transactional
     public void decreaseStockAmount(Long bookId, Long amount) {
         Book book = bookRepository.getById(bookId);
-        book.setStockAmount(book.getStockAmount() - amount);
-        if (bookStockAmountChecker.checkStockAmountValid(book)) {
+        if (bookChecker.checkValidForUpdatingStock(book, bookId, amount)) {
+            book.setStockAmount(book.getStockAmount() - amount);
             bookRepository.update(book);
         }
     }
 
     @Transactional
     public void updateStockAmount(Book book) {
-        if (bookStockAmountChecker.checkStockAmountValid(book)) {
-            Book bookDB = bookRepository.getById(book.getId());
+        Book bookDB = bookRepository.getById(book.getId());
+        if (bookChecker.checkValidForUpdatingStock(bookDB, book.getId(), 0L)) {
             bookDB.setStockAmount(book.getStockAmount());
             bookRepository.update(bookDB);
         }

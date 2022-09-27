@@ -37,8 +37,4 @@ public class Book extends AbstractEntity {
         super.setId(id);
         this.stockAmount = stockAmount;
     }
-
-    public boolean isStockAmountValid() {
-        return stockAmount >= 0;
-    }
 }

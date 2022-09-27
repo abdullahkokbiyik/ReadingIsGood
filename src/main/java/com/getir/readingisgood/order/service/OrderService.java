@@ -2,6 +2,7 @@ package com.getir.readingisgood.order.service;
 
 import com.getir.readingisgood.book.entity.Book;
 import com.getir.readingisgood.book.service.BookService;
+import com.getir.readingisgood.book.service.checker.BookChecker;
 import com.getir.readingisgood.order.entity.Order;
 import com.getir.readingisgood.order.repository.OrderRepository;
 import com.getir.readingisgood.order.service.pojo.GetOrdersOfCustomersPojo;
@@ -20,6 +21,7 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final BookService bookService;
+    private final BookChecker bookChecker;
 
     @Transactional(readOnly = true)
     public List<Order> getOrdersOfCustomer(GetOrdersOfCustomersPojo getOrdersOfCustomersPojo) {
@@ -33,10 +35,12 @@ public class OrderService {
 
     @Transactional
     public void add(List<Order> orders) {
-        for (Order order : orders) {
-            setOrderCost(order);
-            orderRepository.add(order);
-            bookService.decreaseStockAmount(order.getBook().getId(), order.getNumOfBooks());
+        if (orders.stream().allMatch(order -> bookChecker.checkExists(order.getBook().getId()))) {
+            for (Order order : orders) {
+                setOrderCost(order);
+                orderRepository.add(order);
+                bookService.decreaseStockAmount(order.getBook().getId(), order.getNumOfBooks());
+            }
         }
     }
 

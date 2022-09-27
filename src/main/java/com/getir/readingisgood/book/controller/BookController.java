@@ -5,27 +5,35 @@ import com.getir.readingisgood.book.controller.dto.GetBookDetailDTO;
 import com.getir.readingisgood.book.controller.dto.UpdateStockDTO;
 import com.getir.readingisgood.book.service.BookService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
 
 @RestController
 @RequestMapping("/book")
 @RequiredArgsConstructor
+@Validated
 public class BookController {
 
     private final BookService bookService;
 
     @PostMapping(value = "/add")
-    public void add(@RequestBody AddBookDTO addBookDTO) {
+    public void add(@Valid @RequestBody AddBookDTO addBookDTO) {
         bookService.add(addBookDTO.convertToDomainObject());
     }
 
     @PostMapping(value = "/updateStockAmount")
-    public void updateStockAmount(@RequestBody UpdateStockDTO updateStockDTO) {
+    public ResponseEntity<String> updateStockAmount(@Valid @RequestBody UpdateStockDTO updateStockDTO) {
         bookService.updateStockAmount(updateStockDTO.convertToDomainObject());
+        return new ResponseEntity<>("Stock successfully updated.", HttpStatus.OK);
     }
 
     @GetMapping(value = "/getBookDetail")
-    public GetBookDetailDTO getBookDetail(@RequestParam("bookId") Long bookId) {
+    public GetBookDetailDTO getBookDetail(@RequestParam("bookId") @Min(1) Long bookId) {
         return new GetBookDetailDTO(bookService.getBookById(bookId));
     }
 }

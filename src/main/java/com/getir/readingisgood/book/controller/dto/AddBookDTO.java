@@ -5,13 +5,22 @@ import com.getir.readingisgood.common.dto.ClientToServerDTO;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.*;
+
 @Getter
 @Setter
 public class AddBookDTO implements ClientToServerDTO<Book> {
 
+    @NotBlank
+    @Size(max = 128)
     private String name;
+
+    @NotNull
+    @Min(1)
     private Long stockAmount;
 
+    @NotNull
+    @Positive
     private Double cost;
 
     @Override

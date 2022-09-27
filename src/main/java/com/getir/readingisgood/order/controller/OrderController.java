@@ -5,8 +5,11 @@ import com.getir.readingisgood.order.controller.dto.OrderDetailDTO;
 import com.getir.readingisgood.order.entity.Order;
 import com.getir.readingisgood.order.service.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,17 +17,18 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/order")
 @RequiredArgsConstructor
+@Validated
 public class OrderController {
 
     private final OrderService orderService;
 
     @PostMapping(value = "/add")
-    public void addOrder(@RequestBody AddOrderDTO addOrderDTO) {
+    public void addOrder(@Valid @RequestBody AddOrderDTO addOrderDTO) {
         orderService.add(addOrderDTO.convertToDomainObject());
     }
 
     @GetMapping(value = "/getOrderDetail")
-    public OrderDetailDTO getOrderDetail(@RequestParam("orderId") Long orderId) {
+    public OrderDetailDTO getOrderDetail(@RequestParam("orderId") @Min(1) Long orderId) {
         return new OrderDetailDTO(orderService.getOrderById(orderId));
     }
 
