@@ -7,6 +7,7 @@ import com.getir.readingisgood.order.controller.dto.BookOrderDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.redis.core.RedisHash;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
+@RedisHash("CustomerOrder")
 public class Order extends AbstractEntity {
 
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
