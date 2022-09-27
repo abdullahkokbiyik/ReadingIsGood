@@ -17,7 +17,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @Validated
 public class StatsController {
-
     private final StatsService statsService;
 
     @GetMapping(value = "/getCustomersMonthlyStats")

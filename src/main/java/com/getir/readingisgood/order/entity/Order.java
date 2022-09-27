@@ -7,7 +7,6 @@ import com.getir.readingisgood.order.controller.dto.BookOrderDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.redis.core.RedisHash;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -17,7 +16,6 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-@RedisHash("CustomerOrder")
 public class Order extends AbstractEntity {
 
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
@@ -42,5 +40,11 @@ public class Order extends AbstractEntity {
         this.book = new Book(bookOrder.getBookId());
         this.numOfBooks = bookOrder.getNumOfBook();
         this.orderDate = orderDate != null ? orderDate : LocalDateTime.now();
+    }
+
+    @Override
+    public String toString() {
+        return "{ Id: " + this.getId() + ", Customer: " + this.customer + ", Book: " + this.book +
+                ", Number of Books: " + this.numOfBooks + ", Order Date: " + this.orderDate + ", Total Cost: " + this.orderCost + " }";
     }
 }

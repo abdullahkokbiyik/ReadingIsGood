@@ -3,9 +3,10 @@ package com.getir.readingisgood.book.service;
 import com.getir.readingisgood.book.entity.Book;
 import com.getir.readingisgood.book.repository.BookRepository;
 import com.getir.readingisgood.book.service.checker.BookChecker;
+import com.getir.readingisgood.common.annotations.QueryEntityLogger;
+import com.getir.readingisgood.common.annotations.SaveEntityLogger;
+import com.getir.readingisgood.common.annotations.UpdateEntityLogger;
 import lombok.RequiredArgsConstructor;
-import org.redisson.Redisson;
-import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,14 +17,14 @@ public class BookService {
     private final BookRepository bookRepository;
     private final BookChecker bookChecker;
 
-    private final RedissonClient client = Redisson.create();
-
     @Transactional
+    @SaveEntityLogger
     public void add(Book book) {
         bookRepository.add(book);
     }
 
     @Transactional
+    @UpdateEntityLogger
     public void decreaseStockAmount(Long bookId, Long amount) {
         Book book = bookRepository.getById(bookId);
         if (bookChecker.checkValidForUpdatingStock(book, bookId, amount)) {
@@ -33,6 +34,7 @@ public class BookService {
     }
 
     @Transactional
+    @UpdateEntityLogger
     public void updateStockAmount(Book book) {
         Book bookDB = bookRepository.getById(book.getId());
         if (bookChecker.checkValidForUpdatingStock(bookDB, book.getId(), 0L)) {
@@ -42,7 +44,11 @@ public class BookService {
     }
 
     @Transactional(readOnly = true)
+    @QueryEntityLogger
     public Book getBookById(Long id) {
-        return bookRepository.getById(id);
+        if (bookChecker.checkExists(id)) {
+            return bookRepository.getById(id);
+        }
+        return new Book();
     }
 }

@@ -2,10 +2,12 @@ package com.getir.readingisgood.order.controller.dto;
 
 import com.getir.readingisgood.order.entity.Order;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class OrderDetailDTO {
     private Long customerId;
     private String customerEmail;

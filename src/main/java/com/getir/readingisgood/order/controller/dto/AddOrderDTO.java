@@ -23,7 +23,6 @@ public class AddOrderDTO implements ClientToServerDTO<List<Order>> {
     @NotEmpty
     private List<@Valid BookOrderDTO> bookOrders;
 
-    @NotNull
     private LocalDateTime orderTime;
 
     @Override

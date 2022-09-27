@@ -3,9 +3,12 @@ package com.getir.readingisgood.customer.controller;
 import com.getir.readingisgood.customer.controller.dto.AddCustomerDTO;
 import com.getir.readingisgood.customer.controller.dto.GetOrdersOfCustomerDTO;
 import com.getir.readingisgood.customer.service.CustomerService;
+import com.getir.readingisgood.customer.service.message.CustomerMessages;
 import com.getir.readingisgood.order.service.OrderService;
 import com.getir.readingisgood.order.service.pojo.GetOrdersOfCustomersPojo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,8 +28,9 @@ public class CustomerController {
     private final OrderService orderService;
 
     @PostMapping(value = "/add")
-    public void add(@Valid @RequestBody AddCustomerDTO addCustomerDTO) {
+    public ResponseEntity<String> add(@Valid @RequestBody AddCustomerDTO addCustomerDTO) {
         customerService.add(addCustomerDTO.convertToDomainObject());
+        return new ResponseEntity<>(CustomerMessages.ADD_CUSTOMER_SUCCESS_MESSAGE, HttpStatus.OK);
     }
 
     @GetMapping(value = "/getOrders")

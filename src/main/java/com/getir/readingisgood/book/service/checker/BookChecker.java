@@ -22,7 +22,7 @@ public class BookChecker {
     public boolean checkExists(Long bookId) {
         Book book = bookRepository.getById(bookId);
         if (book == null) {
-            messageContext.addErrorMessage(BookMessages.ERROR_BOOK_DOES_NOT_EXIST, bookId.toString());
+            messageContext.addErrorMessage(BookMessages.ERROR_BOOK_DOES_NOT_EXIST, bookId);
             return false;
         }
         return true;

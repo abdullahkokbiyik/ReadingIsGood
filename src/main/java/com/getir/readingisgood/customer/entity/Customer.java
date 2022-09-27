@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.redis.core.RedisHash;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +16,6 @@ import javax.persistence.Table;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@RedisHash("Customer")
 public class Customer extends AbstractEntity {
 
     @Column(name = "name")
@@ -28,5 +26,10 @@ public class Customer extends AbstractEntity {
 
     public Customer(Long id) {
         super.setId(id);
+    }
+
+    @Override
+    public String toString() {
+        return "{ Id: " + this.getId() + ", Name: " + this.name + ", E-Mail: " + this.email + " }";
     }
 }

@@ -2,9 +2,11 @@ package com.getir.readingisgood.order.service;
 
 import com.getir.readingisgood.book.entity.Book;
 import com.getir.readingisgood.book.service.BookService;
-import com.getir.readingisgood.book.service.checker.BookChecker;
+import com.getir.readingisgood.common.annotations.QueryEntityLogger;
+import com.getir.readingisgood.common.annotations.SaveEntityLogger;
 import com.getir.readingisgood.order.entity.Order;
 import com.getir.readingisgood.order.repository.OrderRepository;
+import com.getir.readingisgood.order.service.checker.OrderChecker;
 import com.getir.readingisgood.order.service.pojo.GetOrdersOfCustomersPojo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,21 +23,27 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final BookService bookService;
-    private final BookChecker bookChecker;
+    private final OrderChecker orderChecker;
 
     @Transactional(readOnly = true)
+    @QueryEntityLogger
     public List<Order> getOrdersOfCustomer(GetOrdersOfCustomersPojo getOrdersOfCustomersPojo) {
         return orderRepository.getPaginatedOrdersByCustomerId(getOrdersOfCustomersPojo);
     }
 
     @Transactional(readOnly = true)
+    @QueryEntityLogger
     public Order getOrderById(Long id) {
-        return orderRepository.getById(id);
+        if (orderChecker.checkOrderExists(id)) {
+            return orderRepository.getById(id);
+        }
+        return new Order();
     }
 
     @Transactional
+    @SaveEntityLogger
     public void add(List<Order> orders) {
-        if (orders.stream().allMatch(order -> bookChecker.checkExists(order.getBook().getId()))) {
+        if (orderChecker.checkForAddOrder(orders)) {
             for (Order order : orders) {
                 setOrderCost(order);
                 orderRepository.add(order);
@@ -45,6 +53,7 @@ public class OrderService {
     }
 
     @Transactional(readOnly = true)
+    @QueryEntityLogger
     public List<Order> getOrdersByDate(LocalDate startDate, LocalDate endDate) {
         LocalDateTime startDateTime = LocalDateTime.of(startDate, LocalTime.MIN);
         LocalDateTime endDateTime = LocalDateTime.of(endDate, LocalTime.MAX);

@@ -1,11 +1,7 @@
 package com.getir.readingisgood.book.entity;
 
 import com.getir.readingisgood.common.entity.AbstractEntity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.data.redis.core.RedisHash;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +13,6 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Getter
 @Setter
-@RedisHash("Book")
 public class Book extends AbstractEntity {
 
     @Column(name = "name")
@@ -36,5 +31,10 @@ public class Book extends AbstractEntity {
     public Book(Long id, Long stockAmount) {
         super.setId(id);
         this.stockAmount = stockAmount;
+    }
+
+    @Override
+    public String toString() {
+        return "{ Id: " + this.getId() + ", Name: " + this.name + ", Stock Amount: " + this.stockAmount + ", Cost: " + this.cost + " }";
     }
 }
