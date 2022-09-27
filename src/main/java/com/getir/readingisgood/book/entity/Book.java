@@ -24,6 +24,9 @@ public class Book extends AbstractEntity {
     @Column(name = "stockAmount")
     private Long stockAmount;
 
+    @Column(name = "cost")
+    private Double cost;
+
     public Book(Long id) {
         super.setId(id);
     }

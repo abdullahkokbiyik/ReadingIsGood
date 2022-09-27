@@ -12,6 +12,7 @@ public class OrderDetailDTO {
     private Long bookId;
     private String bookName;
     private Long numOfBooks;
+    private double orderCost;
 
     public OrderDetailDTO(Order order) {
         this.customerId = order.getCustomer().getId();
@@ -19,5 +20,6 @@ public class OrderDetailDTO {
         this.bookId = order.getBook().getId();
         this.bookName = order.getBook().getName();
         this.numOfBooks = order.getNumOfBooks();
+        this.orderCost = order.getOrderCost();
     }
 }

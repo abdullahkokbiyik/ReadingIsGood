@@ -12,8 +12,10 @@ public class AddBookDTO implements ClientToServerDTO<Book> {
     private String name;
     private Long stockAmount;
 
+    private Double cost;
+
     @Override
     public Book convertToDomainObject() {
-        return new Book(name, stockAmount);
+        return new Book(name, stockAmount, cost);
     }
 }

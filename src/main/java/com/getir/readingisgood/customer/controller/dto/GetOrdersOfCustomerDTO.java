@@ -12,10 +12,14 @@ public class GetOrdersOfCustomerDTO {
     private String customerEmail;
     private String bookName;
     private LocalDateTime orderDate;
+    private long numOfBooks;
+    private double orderCost;
 
     public GetOrdersOfCustomerDTO(Order order) {
         this.customerEmail = order.getCustomer().getEmail();
         this.bookName = order.getBook().getName();
         this.orderDate = order.getOrderDate();
+        this.numOfBooks = order.getNumOfBooks();
+        this.orderCost = order.getOrderCost();
     }
 }

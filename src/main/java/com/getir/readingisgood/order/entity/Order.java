@@ -4,7 +4,6 @@ import com.getir.readingisgood.book.entity.Book;
 import com.getir.readingisgood.common.entity.AbstractEntity;
 import com.getir.readingisgood.customer.entity.Customer;
 import com.getir.readingisgood.order.controller.dto.BookOrderDTO;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,7 +16,6 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class Order extends AbstractEntity {
 
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
@@ -33,6 +31,9 @@ public class Order extends AbstractEntity {
 
     @Column(name = "order_date")
     private LocalDateTime orderDate;
+
+    @Column(name = "order_cost")
+    private Double orderCost;
 
     public Order(Long customerId, BookOrderDTO bookOrder, LocalDateTime orderDate) {
         this.customer = new Customer(customerId);

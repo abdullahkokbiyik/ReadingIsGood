@@ -10,10 +10,12 @@ public class GetBookDetailDTO {
     private Long id;
     private String name;
     private Long stockAmount;
+    private double cost;
 
     public GetBookDetailDTO(Book book) {
         this.id = book.getId();
         this.name = book.getName();
         this.stockAmount = book.getStockAmount();
+        this.cost = book.getCost();
     }
 }
