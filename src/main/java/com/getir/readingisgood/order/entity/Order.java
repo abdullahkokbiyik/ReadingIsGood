@@ -18,21 +18,21 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Order extends AbstractEntity {
 
-    @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private Customer customer;
 
-    @JoinColumn(name = "book_id", referencedColumnName = "id")
+    @JoinColumn(name = "book_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private Book book;
 
-    @Column(name = "num_of_books")
+    @Column(name = "num_of_books", nullable = false)
     private Long numOfBooks;
 
-    @Column(name = "order_date")
+    @Column(name = "order_date", nullable = false)
     private LocalDateTime orderDate;
 
-    @Column(name = "order_cost")
+    @Column(name = "order_cost", nullable = false)
     private Double orderCost;
 
     public Order(Long customerId, BookOrderDTO bookOrder, LocalDateTime orderDate) {

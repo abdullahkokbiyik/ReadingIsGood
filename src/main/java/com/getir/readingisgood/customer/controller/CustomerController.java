@@ -5,7 +5,6 @@ import com.getir.readingisgood.customer.controller.dto.GetOrdersOfCustomerDTO;
 import com.getir.readingisgood.customer.service.CustomerService;
 import com.getir.readingisgood.customer.service.message.CustomerMessages;
 import com.getir.readingisgood.order.service.OrderService;
-import com.getir.readingisgood.order.service.pojo.GetOrdersOfCustomersPojo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +34,6 @@ public class CustomerController {
 
     @GetMapping(value = "/getOrders")
     public List<GetOrdersOfCustomerDTO> getOrders(@RequestParam("customerId") @Min(1) Long customerId, @RequestParam("pageNum") @Min(0) int pageNum, @RequestParam("pageSize") @Min(1) int pageSize) {
-        GetOrdersOfCustomersPojo getOrdersOfCustomersPojo = new GetOrdersOfCustomersPojo(customerId, pageNum, pageSize);
-        return orderService.getOrdersOfCustomer(getOrdersOfCustomersPojo).stream().map(GetOrdersOfCustomerDTO::new).collect(Collectors.toList());
+        return orderService.getOrdersOfCustomer(customerId, pageNum, pageSize).stream().map(GetOrdersOfCustomerDTO::new).collect(Collectors.toList());
     }
 }

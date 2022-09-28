@@ -20,7 +20,7 @@ public class StatsController {
     private final StatsService statsService;
 
     @GetMapping(value = "/getCustomersMonthlyStats")
-    public List<MonthlyStatsDTO> getCustomersMonthlyStats(@RequestParam("customerId") @Min(1) Long customerId) {
-        return statsService.getCustomersMonthlyStats(customerId);
+    public List<MonthlyStatsDTO> getCustomersMonthlyStats(@RequestParam("customerId") @Min(1) Long customerId, @RequestParam("pageNum") @Min(0) int pageNum, @RequestParam("pageSize") @Min(1) int pageSize) {
+        return statsService.getCustomersMonthlyStats(customerId, pageNum, pageSize);
     }
 }

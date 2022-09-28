@@ -1,5 +1,6 @@
 package com.getir.readingisgood.book.service;
 
+import com.getir.readingisgood.author.service.AuthorService;
 import com.getir.readingisgood.book.entity.Book;
 import com.getir.readingisgood.book.repository.BookRepository;
 import com.getir.readingisgood.book.service.checker.BookChecker;
@@ -16,10 +17,12 @@ public class BookService {
 
     private final BookRepository bookRepository;
     private final BookChecker bookChecker;
+    private final AuthorService authorService;
 
     @Transactional
     @SaveEntityLogger
     public void add(Book book) {
+        authorService.getIfExistsOrAdd(book.getAuthor());
         bookRepository.add(book);
     }
 

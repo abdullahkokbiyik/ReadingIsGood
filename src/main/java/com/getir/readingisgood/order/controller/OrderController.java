@@ -37,8 +37,9 @@ public class OrderController {
     }
 
     @GetMapping(value = "/getOrdersByDate")
-    public List<OrderDetailDTO> getOrdersByDate(@RequestParam("startDate") LocalDate startDate, @RequestParam("endDate") LocalDate endDate) {
-        List<Order> orders = orderService.getOrdersByDate(startDate, endDate);
+    public List<OrderDetailDTO> getOrdersByDate(@RequestParam("startDate") LocalDate startDate, @RequestParam("endDate") LocalDate endDate,
+                                                @RequestParam("pageNum") @Min(0) int pageNum, @RequestParam("pageSize") @Min(1) int pageSize) {
+        List<Order> orders = orderService.getOrdersByDate(startDate, endDate, pageNum, pageSize);
         return orders.stream().map(OrderDetailDTO::new).collect(Collectors.toList());
     }
 }
