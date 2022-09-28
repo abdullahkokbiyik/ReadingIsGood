@@ -20,6 +20,6 @@ public class AuthorRepository {
     public Author getByUniqueIndex(String uniqueIndex) {
         TypedQuery<Author> query = entityManager.createQuery("select a from Author a where a.uniqueIndex = :uniqueIndex ", Author.class);
         query.setParameter("uniqueIndex", uniqueIndex);
-        return query.getSingleResult();
+        return query.getResultList().stream().findFirst().orElse(null);
     }
 }

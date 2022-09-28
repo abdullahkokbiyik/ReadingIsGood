@@ -16,11 +16,17 @@ public class OrderRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<Order> getOrdersByCustomer(GetOrdersOfCustomersPojo getOrdersOfCustomersPojo) {
+    public List<Order> getOrdersByCustomerPaginated(GetOrdersOfCustomersPojo getOrdersOfCustomersPojo) {
         TypedQuery<Order> query = entityManager.createQuery("select o from Order o where o.customer.id = :customerId", Order.class);
         query.setParameter("customerId", getOrdersOfCustomersPojo.getCustomerId());
         query.setFirstResult(getOrdersOfCustomersPojo.getPageNum() * getOrdersOfCustomersPojo.getPageSize());
         query.setMaxResults(getOrdersOfCustomersPojo.getPageSize());
+        return query.getResultList();
+    }
+
+    public List<Order> getOrdersByCustomer(Long customerId) {
+        TypedQuery<Order> query = entityManager.createQuery("select o from Order o where o.customer.id = :customerId", Order.class);
+        query.setParameter("customerId", customerId);
         return query.getResultList();
     }
 

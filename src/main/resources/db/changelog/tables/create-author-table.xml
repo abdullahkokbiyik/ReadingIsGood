@@ -1,0 +1,18 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+    <changeSet id="readingisgood-author" author="abdullahk">
+        <sql>
+            CREATE TABLE AUTHOR(
+                ID SERIAL PRIMARY KEY NOT NULL,
+                AUTHOR_NAME CHARACTER VARYING(200) NOT NULL,
+                SURNAME CHARACTER VARYING(200) NOT NULL,
+                NATIONALITY CHARACTER VARYING(50) NOT NULL,
+                UID CHARACTER VARYING(38) NOT NULL
+            );
+            CREATE UNIQUE INDEX ui_author_uid ON AUTHOR(UID);
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

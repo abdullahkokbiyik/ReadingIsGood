@@ -1,0 +1,20 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+    <changeSet id="readingisgood-book" author="abdullahk">
+        <sql>
+            CREATE TABLE CUSTOMER_ORDER(
+                 ID SERIAL PRIMARY KEY NOT NULL,
+                 ORDER_DATE TIMESTAMP NOT NULL,
+                 BOOK_ID BIGINT NOT NULL,
+                 CUSTOMER_ID BIGINT NOT NULL,
+                 NUM_OF_BOOKS BIGINT NOT NULL,
+                 ORDER_COST DOUBLE PRECISION NOT NULL,
+                 CONSTRAINT FK_ORDER_BOOK_ID FOREIGN KEY (BOOK_ID) REFERENCES BOOK(ID),
+                 CONSTRAINT FK_ORDER_CUSTOMER_ID FOREIGN KEY (CUSTOMER_ID) REFERENCES CUSTOMER(ID)
+            );
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

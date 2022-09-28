@@ -19,7 +19,7 @@ public class GetBookDetailDTO {
 
     public GetBookDetailDTO(Book book) {
         this.id = book.getId();
-        this.name = book.getName();
+        this.name = book.getBookName();
         this.stockAmount = book.getStockAmount();
         this.cost = book.getCost();
         this.author = new GetAuthorDetailDTO(book.getAuthor());

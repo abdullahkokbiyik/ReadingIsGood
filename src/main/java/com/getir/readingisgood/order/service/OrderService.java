@@ -28,7 +28,7 @@ public class OrderService {
     @QueryEntityLogger
     public List<Order> getOrdersOfCustomer(Long customerId, int pageNum, int pageSize) {
         GetOrdersOfCustomersPojo getOrdersOfCustomersPojo = new GetOrdersOfCustomersPojo(customerId, pageNum, pageSize);
-        return orderRepository.getOrdersByCustomer(getOrdersOfCustomersPojo);
+        return orderRepository.getOrdersByCustomerPaginated(getOrdersOfCustomersPojo);
     }
 
     @Transactional(readOnly = true)

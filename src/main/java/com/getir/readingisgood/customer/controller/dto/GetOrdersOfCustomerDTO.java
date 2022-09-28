@@ -17,7 +17,7 @@ public class GetOrdersOfCustomerDTO {
 
     public GetOrdersOfCustomerDTO(Order order) {
         this.customerEmail = order.getCustomer().getEmail();
-        this.bookName = order.getBook().getName();
+        this.bookName = order.getBook().getBookName();
         this.orderDate = order.getOrderDate();
         this.numOfBooks = order.getNumOfBooks();
         this.orderCost = order.getOrderCost();

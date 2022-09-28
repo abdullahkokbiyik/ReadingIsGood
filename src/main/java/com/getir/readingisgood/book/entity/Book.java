@@ -14,20 +14,20 @@ import javax.persistence.*;
 @Setter
 public class Book extends AbstractEntity {
 
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "book_name")
+    private String bookName;
 
-    @Column(name = "stockAmount", nullable = false)
+    @Column(name = "stock_amount")
     private Long stockAmount;
 
-    @Column(name = "cost", nullable = false)
+    @Column(name = "cost")
     private Double cost;
 
-    @JoinColumn(name = "author_id", referencedColumnName = "id", nullable = false)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Author.class)
     private Author author;
 
-    @Column(name = "uid", unique = true, nullable = false)
+    @Column(name = "uid", unique = true)
     private String uniqueIndex;
 
     public Book(Long id) {
@@ -41,7 +41,7 @@ public class Book extends AbstractEntity {
 
     @Override
     public String toString() {
-        return "{ Id: " + this.getId() + ", Name: " + this.name + ", Stock Amount: " + this.stockAmount + ", Cost: " + this.cost +
+        return "{ Id: " + this.getId() + ", Name: " + this.bookName + ", Stock Amount: " + this.stockAmount + ", Cost: " + this.cost +
                 ", Author: " + this.author + ", Unique Index: " + this.uniqueIndex + " }";
     }
 }

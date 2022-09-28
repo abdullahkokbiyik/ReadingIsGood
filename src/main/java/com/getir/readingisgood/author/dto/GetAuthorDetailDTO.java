@@ -13,7 +13,7 @@ public class GetAuthorDetailDTO {
     private String uniqueIndex;
 
     public GetAuthorDetailDTO(Author author) {
-        this.name = author.getName();
+        this.name = author.getAuthorName();
         this.surname = author.getSurname();
         this.nationality = author.getNationality();
         this.uniqueIndex = author.getUniqueIndex();

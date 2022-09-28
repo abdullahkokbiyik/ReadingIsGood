@@ -20,7 +20,7 @@ public class OrderDetailDTO {
         this.customerId = order.getCustomer().getId();
         this.customerEmail = order.getCustomer().getEmail();
         this.bookId = order.getBook().getId();
-        this.bookName = order.getBook().getName();
+        this.bookName = order.getBook().getBookName();
         this.numOfBooks = order.getNumOfBooks();
         this.orderCost = order.getOrderCost();
     }

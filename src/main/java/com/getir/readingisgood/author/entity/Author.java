@@ -18,25 +18,25 @@ import javax.persistence.Table;
 @Setter
 public class Author extends AbstractEntity {
 
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "author_name")
+    private String authorName;
 
-    @Column(name = "surname", nullable = false)
+    @Column(name = "surname")
     private String surname;
 
-    @Column(name = "nationality", nullable = false)
+    @Column(name = "nationality")
     private String nationality;
 
-    @Column(name = "uid", unique = true, nullable = false)
+    @Column(name = "uid", unique = true)
     private String uniqueIndex;
 
     @Override
     public String toString() {
-        return "{ Name: " + this.name + ", Surname: " + this.surname + ", Nationality: " + this.nationality + ", Unique Index: " + this.uniqueIndex + " }";
+        return "{ Name: " + this.authorName + ", Surname: " + this.surname + ", Nationality: " + this.nationality + ", Unique Index: " + this.uniqueIndex + " }";
     }
 
     public void copyFromAnotherObject(Author author) {
-        this.name = author.getName();
+        this.authorName = author.getAuthorName();
         this.nationality = author.getNationality();
         this.surname = author.getSurname();
         this.uniqueIndex = author.getUniqueIndex();

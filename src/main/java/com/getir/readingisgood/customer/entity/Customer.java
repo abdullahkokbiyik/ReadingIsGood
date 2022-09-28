@@ -18,10 +18,10 @@ import javax.persistence.Table;
 @AllArgsConstructor
 public class Customer extends AbstractEntity {
 
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "customer_name")
+    private String customerName;
 
-    @Column(name = "email", unique = true, nullable = false)
+    @Column(name = "email", unique = true)
     private String email;
 
     public Customer(Long id) {
@@ -30,6 +30,6 @@ public class Customer extends AbstractEntity {
 
     @Override
     public String toString() {
-        return "{ Id: " + this.getId() + ", Name: " + this.name + ", E-Mail: " + this.email + " }";
+        return "{ Id: " + this.getId() + ", Name: " + this.customerName + ", E-Mail: " + this.email + " }";
     }
 }
