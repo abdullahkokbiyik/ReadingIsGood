@@ -14,7 +14,6 @@ Used technologies in this project are:
 - H2 In Memory Database
 - Swagger
 - Liquibase
-- Redis
 - Git
 
 # Endpoints
