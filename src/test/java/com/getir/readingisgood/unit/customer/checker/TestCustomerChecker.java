@@ -45,7 +45,7 @@ public class TestCustomerChecker extends AbstractUnitTest {
         Assertions.assertFalse(customerChecker.checkCustomerExists(customerId));
 
         Mockito.verify(customerRepository).getCustomerById(customerId);
-        Mockito.verify(messageContext).addErrorMessage(CustomerMessages.ERROR_CUSTOMER_DOES_NOT_EXIST, customerId);
+        Mockito.verify(messageContext).addErrorMessage(CustomerMessages.ERROR_CUSTOMER_DOES_NOT_EXIST, "id", customerId);
     }
 
     @Test
