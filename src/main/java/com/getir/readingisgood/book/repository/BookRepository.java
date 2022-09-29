@@ -1,9 +1,11 @@
 package com.getir.readingisgood.book.repository;
 
 import com.getir.readingisgood.book.entity.Book;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -21,6 +23,7 @@ public class BookRepository {
         return entityManager.find(Book.class, id);
     }
 
+    @Lock(LockModeType.OPTIMISTIC_FORCE_INCREMENT)
     public void update(Book book) {
         entityManager.merge(book);
     }

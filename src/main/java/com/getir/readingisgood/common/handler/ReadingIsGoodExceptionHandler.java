@@ -10,6 +10,7 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.persistence.OptimisticLockException;
 import javax.validation.ConstraintViolationException;
 
 @Slf4j
@@ -54,10 +55,17 @@ public class ReadingIsGoodExceptionHandler {
     }
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
-    public ResponseEntity<String> missingServletRequestParameterException(MissingServletRequestParameterException missingServletRequestParameterException) {
+    public ResponseEntity<String> missingServletRequestParameterExceptionHandler(MissingServletRequestParameterException missingServletRequestParameterException) {
         String errorMessage = createErrorMessage(missingServletRequestParameterException.getMessage());
         log.error(errorMessage);
         return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(OptimisticLockException.class)
+    public ResponseEntity<String> optimisticLockExceptionHandler(OptimisticLockException optimisticLockException) {
+        String errorMessage = createErrorMessage("Object was updated or deleted by another transaction. Please check and try again later.");
+        log.error(errorMessage);
+        return new ResponseEntity<>(errorMessage, HttpStatus.CONFLICT);
     }
 
     private String createErrorMessage(String message) {
