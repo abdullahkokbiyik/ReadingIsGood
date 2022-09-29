@@ -5,6 +5,7 @@ import com.getir.readingisgood.order.controller.dto.OrderDetailDTO;
 import com.getir.readingisgood.order.service.OrderService;
 import com.getir.readingisgood.order.service.message.OrderMessages;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -35,7 +36,8 @@ public class OrderController {
     }
 
     @GetMapping(value = "/getOrdersByDate")
-    public List<OrderDetailDTO> getOrdersByDate(@RequestParam("startDate") LocalDate startDate, @RequestParam("endDate") LocalDate endDate,
+    public List<OrderDetailDTO> getOrdersByDate(@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+                                                @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
                                                 @RequestParam("pageNum") @Min(0) int pageNum, @RequestParam("pageSize") @Min(1) int pageSize) {
         return orderService.getOrdersByDate(startDate, endDate, pageNum, pageSize);
     }

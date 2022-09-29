@@ -13,7 +13,6 @@ Used technologies in this project are:
 - Maven
 - H2 In Memory Database
 - Swagger
-- Liquibase
 - Git
 
 # Endpoints
@@ -104,14 +103,6 @@ In directory that pom.xml exists, below command should be executed for testing:
 ```sh
 mvn test
 ```
-
-# Liquibase
-
-To clean up the database, run 
-```sh
-mvn liquibase:dropAll liquibase:update
-```
-command.
 
 # Swagger
 

@@ -387,11 +387,11 @@
 					"query": [
 						{
 							"key": "startDate",
-							"value": "26/09/2022"
+							"value": "2022-09-29"
 						},
 						{
 							"key": "endDate",
-							"value": "29/09/2022"
+							"value": "2022-09-30"
 						},
 						{
 							"key": "pageNum",

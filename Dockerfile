@@ -1,15 +1,11 @@
-FROM openjdk:17-jdk-slim-buster as build
+FROM maven:3.6.3-openjdk-17 as build
 
-COPY .mvn .mvn
-COPY mvnw .
-COPY pom.xml .
-RUN ./mvnw dependency:go-offline
-
-COPY src src
-RUN ./mvnw package -DskipTests -q
+COPY pom.xml /build/
+COPY src /build/src/
+WORKDIR /build/
+RUN mvn clean install -Dmaven.test.skip=true -q
 
 FROM openjdk:17-jdk-slim-buster
-
-COPY --from=build target/readingisgood-0.0.1.jar readingisgood-0.0.1.jar
-
+WORKDIR /app
+COPY --from=build /build/target/readingisgood-0.0.1.jar /app/
 ENTRYPOINT ["java", "-jar", "readingisgood-0.0.1.jar"]
