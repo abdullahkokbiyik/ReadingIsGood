@@ -1,6 +1,7 @@
 package com.getir.readingisgood.customer.controller;
 
 import com.getir.readingisgood.customer.controller.dto.AddCustomerDTO;
+import com.getir.readingisgood.customer.controller.dto.GetCustomerDetailDTO;
 import com.getir.readingisgood.customer.controller.dto.GetOrdersOfCustomerDTO;
 import com.getir.readingisgood.customer.service.CustomerService;
 import com.getir.readingisgood.customer.service.message.CustomerMessages;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @RestController
@@ -34,5 +36,10 @@ public class CustomerController {
     @GetMapping(value = "/getOrdersOfCustomer")
     public List<GetOrdersOfCustomerDTO> getOrdersOfCustomer(@RequestParam("customerId") @Min(1) Long customerId, @RequestParam("pageNum") @Min(0) int pageNum, @RequestParam("pageSize") @Min(1) int pageSize) {
         return orderService.getOrdersOfCustomer(customerId, pageNum, pageSize);
+    }
+
+    @GetMapping(value = "/getCustomerByEmail")
+    public GetCustomerDetailDTO getCustomerByEmail(@RequestParam("email") @NotBlank String email) {
+        return customerService.getCustomerByEmail(email);
     }
 }

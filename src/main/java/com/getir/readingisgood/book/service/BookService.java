@@ -62,4 +62,14 @@ public class BookService {
         }
         return new GetBookDetailDTO();
     }
+
+    @Transactional(readOnly = true)
+    @QueryEntityLogger
+    public GetBookDetailDTO getBookDetailByUniqueIndex(String uniqueIndex) {
+        Book book = bookRepository.getByUniqueIndex(uniqueIndex);
+        if (bookChecker.checkExists(book, uniqueIndex)) {
+            return new GetBookDetailDTO(book);
+        }
+        return new GetBookDetailDTO();
+    }
 }

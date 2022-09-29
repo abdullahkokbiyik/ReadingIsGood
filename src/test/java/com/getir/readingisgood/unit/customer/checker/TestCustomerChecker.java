@@ -47,4 +47,21 @@ public class TestCustomerChecker extends AbstractUnitTest {
         Mockito.verify(customerRepository).getCustomerById(customerId);
         Mockito.verify(messageContext).addErrorMessage(CustomerMessages.ERROR_CUSTOMER_DOES_NOT_EXIST, customerId);
     }
+
+    @Test
+    public void testCheckCustomerExistsByEmail() {
+        Customer customer = TestEntityBuilder.createCustomer(1L);
+        String email = customer.getEmail();
+
+        Assertions.assertTrue(customerChecker.checkCustomerExists(customer, email));
+    }
+
+    @Test
+    public void testCheckCustomerNotExistsByEmail() {
+        String email = "email@email.com";
+
+        Assertions.assertFalse(customerChecker.checkCustomerExists(null, email));
+
+        Mockito.verify(messageContext).addErrorMessage(CustomerMessages.ERROR_CUSTOMER_DOES_NOT_EXIST, "email", email);
+    }
 }

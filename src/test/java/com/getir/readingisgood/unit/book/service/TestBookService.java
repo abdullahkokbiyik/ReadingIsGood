@@ -70,4 +70,22 @@ public class TestBookService extends AbstractUnitTest {
         Mockito.verify(bookChecker).checkExists(bookId);
         Mockito.verify(bookRepository).getById(bookId);
     }
+
+    @Test
+    public void testGetBookDetailByUniqueIndex() {
+        Book book = TestEntityBuilder.createBook(1L, 1L);
+        String uniqueIndex = book.getUniqueIndex();
+
+        Mockito.when(bookRepository.getByUniqueIndex(uniqueIndex)).thenReturn(book);
+        Mockito.when(bookChecker.checkExists(book, uniqueIndex)).thenReturn(true);
+
+        GetBookDetailDTO getBookDetailDTO = bookService.getBookDetailByUniqueIndex(uniqueIndex);
+
+        Assertions.assertNotNull(getBookDetailDTO);
+        Assertions.assertEquals(book.getBookName(), getBookDetailDTO.getName());
+        Assertions.assertEquals(book.getUniqueIndex(), getBookDetailDTO.getUniqueIndex());
+
+        Mockito.verify(bookRepository).getByUniqueIndex(uniqueIndex);
+        Mockito.verify(bookChecker).checkExists(book, uniqueIndex);
+    }
 }

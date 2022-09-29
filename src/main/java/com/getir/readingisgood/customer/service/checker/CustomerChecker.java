@@ -17,7 +17,15 @@ public class CustomerChecker {
     public boolean checkCustomerExists(Long customerId) {
         Customer customer = customerRepository.getCustomerById(customerId);
         if (customer == null) {
-            messageContext.addErrorMessage(CustomerMessages.ERROR_CUSTOMER_DOES_NOT_EXIST, customerId);
+            messageContext.addErrorMessage(CustomerMessages.ERROR_CUSTOMER_DOES_NOT_EXIST, "id", customerId);
+            return false;
+        }
+        return true;
+    }
+
+    public boolean checkCustomerExists(Customer customer, String email) {
+        if (customer == null) {
+            messageContext.addErrorMessage(CustomerMessages.ERROR_CUSTOMER_DOES_NOT_EXIST, "email", email);
             return false;
         }
         return true;

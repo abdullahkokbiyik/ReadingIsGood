@@ -45,7 +45,7 @@ public class TestBookChecker extends AbstractUnitTest {
         Assertions.assertFalse(bookChecker.checkValidForUpdatingStock(null, bookId, 5L));
 
         Mockito.verify(bookRepository).getById(bookId);
-        Mockito.verify(messageContext).addErrorMessage(BookMessages.ERROR_BOOK_DOES_NOT_EXIST, bookId);
+        Mockito.verify(messageContext).addErrorMessage(BookMessages.ERROR_BOOK_DOES_NOT_EXIST, "id", bookId);
     }
 
     @Test
@@ -82,6 +82,22 @@ public class TestBookChecker extends AbstractUnitTest {
         Assertions.assertFalse(bookChecker.checkExists(bookId));
 
         Mockito.verify(bookRepository).getById(bookId);
-        Mockito.verify(messageContext).addErrorMessage(BookMessages.ERROR_BOOK_DOES_NOT_EXIST, bookId);
+        Mockito.verify(messageContext).addErrorMessage(BookMessages.ERROR_BOOK_DOES_NOT_EXIST, "id", bookId);
+    }
+
+    @Test
+    public void testCheckExistsUniqueIndex() {
+        Book book = TestEntityBuilder.createBook(1L, 1L);
+
+        Assertions.assertTrue(bookChecker.checkExists(book, book.getUniqueIndex()));
+    }
+
+    @Test
+    public void testCheckNotExistsUniqueIndex() {
+        String uniqueIndex = "test";
+
+        Assertions.assertFalse(bookChecker.checkExists(null, uniqueIndex));
+
+        Mockito.verify(messageContext).addErrorMessage(BookMessages.ERROR_BOOK_DOES_NOT_EXIST, "unique index", uniqueIndex);
     }
 }

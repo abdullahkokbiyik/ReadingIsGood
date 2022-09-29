@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 
 @RestController
 @RequestMapping("/book")
@@ -37,5 +38,10 @@ public class BookController {
     @GetMapping(value = "/getBookDetail")
     public GetBookDetailDTO getBookDetail(@RequestParam("bookId") @Min(1) Long bookId) {
         return bookService.getBookDetail(bookId);
+    }
+
+    @GetMapping(value = "/getBookDetailByUniqueIndex")
+    public GetBookDetailDTO getBookDetailByUniqueIndex(@RequestParam("uniqueIndex") @NotBlank String uniqueIndex) {
+        return bookService.getBookDetailByUniqueIndex(uniqueIndex);
     }
 }
