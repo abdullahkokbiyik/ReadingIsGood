@@ -122,3 +122,10 @@ http://localhost:8080/readingisgood/swagger-ui.html#/
 ```
 Note that application must be up and running to see this documentation page.
 
+# Authentication
+
+Basic in memory authentication is implemented.
+```sh
+username: readingisgoodadmin
+password: readingisgoodadminpass
+```
