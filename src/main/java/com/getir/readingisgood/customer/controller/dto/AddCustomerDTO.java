@@ -22,6 +22,6 @@ public class AddCustomerDTO implements ClientToServerDTO<Customer> {
 
     @Override
     public Customer convertToDomainObject() {
-        return new Customer(name, email);
+        return new Customer(null, name, email);
     }
 }

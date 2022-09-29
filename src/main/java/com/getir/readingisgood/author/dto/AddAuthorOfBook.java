@@ -30,6 +30,6 @@ public class AddAuthorOfBook implements ClientToServerDTO<Author> {
 
     @Override
     public Author convertToDomainObject() {
-        return new Author(name, surname, nationality, uniqueIndex);
+        return new Author(null, name, surname, nationality, uniqueIndex);
     }
 }

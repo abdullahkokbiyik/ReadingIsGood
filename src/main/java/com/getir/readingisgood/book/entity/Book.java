@@ -1,10 +1,13 @@
 package com.getir.readingisgood.book.entity;
 
 import com.getir.readingisgood.author.entity.Author;
-import com.getir.readingisgood.common.entity.AbstractEntity;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "book")
@@ -12,7 +15,11 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Book extends AbstractEntity {
+public class Book implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Column(name = "book_name")
     private String bookName;
@@ -31,11 +38,11 @@ public class Book extends AbstractEntity {
     private String uniqueIndex;
 
     public Book(Long id) {
-        super.setId(id);
+        this.id = id;
     }
 
     public Book(Long id, Long stockAmount) {
-        super.setId(id);
+        this.id = id;
         this.stockAmount = stockAmount;
     }
 

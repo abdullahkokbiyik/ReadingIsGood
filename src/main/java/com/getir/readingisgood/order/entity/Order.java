@@ -1,7 +1,6 @@
 package com.getir.readingisgood.order.entity;
 
 import com.getir.readingisgood.book.entity.Book;
-import com.getir.readingisgood.common.entity.AbstractEntity;
 import com.getir.readingisgood.customer.entity.Customer;
 import com.getir.readingisgood.order.controller.dto.BookOrderDTO;
 import lombok.Getter;
@@ -9,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
@@ -16,7 +16,11 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Order extends AbstractEntity {
+public class Order implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Customer.class)

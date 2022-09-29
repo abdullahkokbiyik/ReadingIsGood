@@ -35,6 +35,6 @@ public class AddBookDTO implements ClientToServerDTO<Book> {
 
     @Override
     public Book convertToDomainObject() {
-        return new Book(name, stockAmount, cost, author.convertToDomainObject(), uniqueIndex);
+        return new Book(null, name, stockAmount, cost, author.convertToDomainObject(), uniqueIndex);
     }
 }
