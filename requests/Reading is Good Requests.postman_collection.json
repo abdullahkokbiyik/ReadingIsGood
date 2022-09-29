@@ -1,0 +1,539 @@
+{
+	"info": {
+		"_postman_id": "876f1df7-70f0-4383-9f1d-e004197085a4",
+		"name": "Reading is Good Requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add Book",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "readingisgoodadmin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "readingisgoodadminpass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"New Book 3\",\r\n    \"stockAmount\": 20,\r\n    \"cost\": 9.5,\r\n    \"author\": {\r\n        \"name\": \"William\",\r\n        \"surname\": \"Shakespeare\",\r\n        \"nationality\": \"UK\",\r\n        \"uniqueIndex\": \"62926a63-9846-4284-a7fb-7170dc3b1d58\"\r\n    },\r\n    \"uniqueIndex\": \"a3da3579-43e9-45bb-b23b-2368cb3e2258\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/readingisgood/book/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"readingisgood",
+						"book",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Book Detail",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "readingisgoodadmin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "readingisgoodadminpass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/readingisgood/book/getBookDetail?bookId=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"readingisgood",
+						"book",
+						"getBookDetail"
+					],
+					"query": [
+						{
+							"key": "bookId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Book Detail By Unique Index",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "readingisgoodadmin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "readingisgoodadminpass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/readingisgood/book/getBookDetailByUniqueIndex?uniqueIndex=a3da3579-43e9-45bb-b23b-2368cb3e2258",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"readingisgood",
+						"book",
+						"getBookDetailByUniqueIndex"
+					],
+					"query": [
+						{
+							"key": "uniqueIndex",
+							"value": "a3da3579-43e9-45bb-b23b-2368cb3e2258"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Customer Detail By Email",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "readingisgoodadmin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "readingisgoodadminpass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/readingisgood/customer/getCustomerByEmail?email=deneme2@gmail.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"readingisgood",
+						"customer",
+						"getCustomerByEmail"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "deneme2@gmail.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Customer",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "readingisgoodadmin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "readingisgoodadminpass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Deneme 2\",\r\n    \"email\": \"deneme2@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/readingisgood/customer/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"readingisgood",
+						"customer",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Order",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "readingisgoodadmin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "readingisgoodadminpass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"customerId\": 3,\r\n    \"bookOrders\": [{\"bookId\": 2, \"numOfBook\": 2}]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/readingisgood/order/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"readingisgood",
+						"order",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Orders By Customer Id",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "readingisgoodadmin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "readingisgoodadminpass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/readingisgood/customer/getOrdersOfCustomer?customerId=3&pageNum=0&pageSize=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"readingisgood",
+						"customer",
+						"getOrdersOfCustomer"
+					],
+					"query": [
+						{
+							"key": "customerId",
+							"value": "3"
+						},
+						{
+							"key": "pageNum",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Orders By Date",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "readingisgoodadmin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "readingisgoodadminpass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/readingisgood/order/getOrdersByDate?startDate=26/09/2022&endDate=29/09/2022&pageNum=0&pageSize=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"readingisgood",
+						"order",
+						"getOrdersByDate"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "26/09/2022"
+						},
+						{
+							"key": "endDate",
+							"value": "29/09/2022"
+						},
+						{
+							"key": "pageNum",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Monthly Stats",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "readingisgoodadmin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "readingisgoodadminpass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/readingisgood/stats/getCustomersMonthlyStats?customerId=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"readingisgood",
+						"stats",
+						"getCustomersMonthlyStats"
+					],
+					"query": [
+						{
+							"key": "customerId",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Orders Detail",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "readingisgoodadmin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "readingisgoodadminpass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/readingisgood/order/getOrderDetail?orderId=4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"readingisgood",
+						"order",
+						"getOrderDetail"
+					],
+					"query": [
+						{
+							"key": "orderId",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Book Stock",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "readingisgoodadmin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "readingisgoodadminpass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bookId\": 2,\r\n    \"newStockAmount\": 25\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/readingisgood/book/updateStockAmount",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"readingisgood",
+						"book",
+						"updateStockAmount"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
