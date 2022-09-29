@@ -1,6 +1,7 @@
 package com.getir.readingisgood.book.service;
 
 import com.getir.readingisgood.author.service.AuthorService;
+import com.getir.readingisgood.book.controller.dto.GetBookDetailDTO;
 import com.getir.readingisgood.book.entity.Book;
 import com.getir.readingisgood.book.repository.BookRepository;
 import com.getir.readingisgood.book.service.checker.BookChecker;
@@ -49,9 +50,16 @@ public class BookService {
     @Transactional(readOnly = true)
     @QueryEntityLogger
     public Book getBookById(Long id) {
+        return bookRepository.getById(id);
+    }
+
+    @Transactional(readOnly = true)
+    @QueryEntityLogger
+    public GetBookDetailDTO getBookDetail(Long id) {
         if (bookChecker.checkExists(id)) {
-            return bookRepository.getById(id);
+            Book book = getBookById(id);
+            return new GetBookDetailDTO(book);
         }
-        return new Book();
+        return new GetBookDetailDTO();
     }
 }

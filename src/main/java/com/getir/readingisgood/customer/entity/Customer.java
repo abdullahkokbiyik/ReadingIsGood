@@ -1,20 +1,17 @@
 package com.getir.readingisgood.customer.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "customer")
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Customer implements Serializable {
+@EqualsAndHashCode
+@Getter
+@Setter
+public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -5,7 +5,7 @@ import com.getir.readingisgood.common.TestEntityBuilder;
 import com.getir.readingisgood.order.entity.Order;
 import com.getir.readingisgood.order.repository.OrderRepository;
 import com.getir.readingisgood.order.service.pojo.GetOrdersByDatePojo;
-import com.getir.readingisgood.order.service.pojo.GetOrdersOfCustomersPojo;
+import com.getir.readingisgood.order.service.pojo.GetOrdersOfCustomerPojo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +20,9 @@ public class TestOrderRepository extends AbstractIntegrationTest {
 
     @Test
     public void testGetOrdersByCustomerPaginated() {
-        GetOrdersOfCustomersPojo getOrdersOfCustomersPojo = TestEntityBuilder.createGetOrdersOfCustomersPojo(10000L);
+        GetOrdersOfCustomerPojo getOrdersOfCustomerPojo = TestEntityBuilder.createGetOrdersOfCustomersPojo(10000L);
 
-        List<Order> orderList = orderRepository.getOrdersByCustomerPaginated(getOrdersOfCustomersPojo);
+        List<Order> orderList = orderRepository.getOrdersByCustomerPaginated(getOrdersOfCustomerPojo);
 
         Assertions.assertEquals(orderList.size(), 2);
     }

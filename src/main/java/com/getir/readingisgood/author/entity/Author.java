@@ -1,20 +1,17 @@
 package com.getir.readingisgood.author.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "author")
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 @Getter
 @Setter
-public class Author implements Serializable {
+public class Author {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,16 +29,16 @@ public class Author implements Serializable {
     @Column(name = "uid", unique = true)
     private String uniqueIndex;
 
-    @Override
-    public String toString() {
-        return "{ Name: " + this.authorName + ", Surname: " + this.surname + ", Nationality: " + this.nationality + ", Unique Index: " + this.uniqueIndex + " }";
-    }
-
     public void copyFromAnotherObject(Author author) {
         this.authorName = author.getAuthorName();
         this.nationality = author.getNationality();
         this.surname = author.getSurname();
         this.uniqueIndex = author.getUniqueIndex();
         this.id = author.getId();
+    }
+
+    @Override
+    public String toString() {
+        return "{ Name: " + this.authorName + ", Surname: " + this.surname + ", Nationality: " + this.nationality + ", Unique Index: " + this.uniqueIndex + " }";
     }
 }

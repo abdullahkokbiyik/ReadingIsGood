@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/customer")
@@ -32,8 +31,8 @@ public class CustomerController {
         return new ResponseEntity<>(CustomerMessages.ADD_CUSTOMER_SUCCESS_MESSAGE, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/getOrders")
-    public List<GetOrdersOfCustomerDTO> getOrders(@RequestParam("customerId") @Min(1) Long customerId, @RequestParam("pageNum") @Min(0) int pageNum, @RequestParam("pageSize") @Min(1) int pageSize) {
-        return orderService.getOrdersOfCustomer(customerId, pageNum, pageSize).stream().map(GetOrdersOfCustomerDTO::new).collect(Collectors.toList());
+    @GetMapping(value = "/getOrdersOfCustomer")
+    public List<GetOrdersOfCustomerDTO> getOrdersOfCustomer(@RequestParam("customerId") @Min(1) Long customerId, @RequestParam("pageNum") @Min(0) int pageNum, @RequestParam("pageSize") @Min(1) int pageSize) {
+        return orderService.getOrdersOfCustomer(customerId, pageNum, pageSize);
     }
 }

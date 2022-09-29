@@ -2,7 +2,7 @@ package com.getir.readingisgood.order.repository;
 
 import com.getir.readingisgood.order.entity.Order;
 import com.getir.readingisgood.order.service.pojo.GetOrdersByDatePojo;
-import com.getir.readingisgood.order.service.pojo.GetOrdersOfCustomersPojo;
+import com.getir.readingisgood.order.service.pojo.GetOrdersOfCustomerPojo;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -16,11 +16,11 @@ public class OrderRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<Order> getOrdersByCustomerPaginated(GetOrdersOfCustomersPojo getOrdersOfCustomersPojo) {
+    public List<Order> getOrdersByCustomerPaginated(GetOrdersOfCustomerPojo getOrdersOfCustomerPojo) {
         TypedQuery<Order> query = entityManager.createQuery("select o from Order o where o.customer.id = :customerId", Order.class);
-        query.setParameter("customerId", getOrdersOfCustomersPojo.getCustomerId());
-        query.setFirstResult(getOrdersOfCustomersPojo.getPageNum() * getOrdersOfCustomersPojo.getPageSize());
-        query.setMaxResults(getOrdersOfCustomersPojo.getPageSize());
+        query.setParameter("customerId", getOrdersOfCustomerPojo.getCustomerId());
+        query.setFirstResult(getOrdersOfCustomerPojo.getPageNum() * getOrdersOfCustomerPojo.getPageSize());
+        query.setMaxResults(getOrdersOfCustomerPojo.getPageSize());
         return query.getResultList();
     }
 

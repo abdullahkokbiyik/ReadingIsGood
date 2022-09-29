@@ -36,6 +36,6 @@ public class BookController {
 
     @GetMapping(value = "/getBookDetail")
     public GetBookDetailDTO getBookDetail(@RequestParam("bookId") @Min(1) Long bookId) {
-        return new GetBookDetailDTO(bookService.getBookById(bookId));
+        return bookService.getBookDetail(bookId);
     }
 }

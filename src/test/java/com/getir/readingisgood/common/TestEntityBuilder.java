@@ -5,7 +5,7 @@ import com.getir.readingisgood.book.entity.Book;
 import com.getir.readingisgood.customer.entity.Customer;
 import com.getir.readingisgood.order.entity.Order;
 import com.getir.readingisgood.order.service.pojo.GetOrdersByDatePojo;
-import com.getir.readingisgood.order.service.pojo.GetOrdersOfCustomersPojo;
+import com.getir.readingisgood.order.service.pojo.GetOrdersOfCustomerPojo;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -24,8 +24,8 @@ public class TestEntityBuilder {
         return new Customer(id, "CustomerName", "customermail@outlook.com");
     }
 
-    public static GetOrdersOfCustomersPojo createGetOrdersOfCustomersPojo(Long customerId) {
-        return new GetOrdersOfCustomersPojo(customerId, 0, 10);
+    public static GetOrdersOfCustomerPojo createGetOrdersOfCustomersPojo(Long customerId) {
+        return new GetOrdersOfCustomerPojo(customerId, 0, 10);
     }
 
     public static Order createOrder(Long id, Long bookId, Long authorId, Long customerId) {

@@ -3,22 +3,19 @@ package com.getir.readingisgood.order.entity;
 import com.getir.readingisgood.book.entity.Book;
 import com.getir.readingisgood.customer.entity.Customer;
 import com.getir.readingisgood.order.controller.dto.BookOrderDTO;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "customer_order")
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Order implements Serializable {
+@EqualsAndHashCode
+@Getter
+@Setter
+public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

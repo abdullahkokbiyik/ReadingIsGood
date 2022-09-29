@@ -1,21 +1,18 @@
 package com.getir.readingisgood.book.entity;
 
 import com.getir.readingisgood.author.entity.Author;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "book")
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 @Getter
 @Setter
-public class Book implements Serializable {
+public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

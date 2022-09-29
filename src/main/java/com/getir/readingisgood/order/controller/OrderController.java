@@ -2,7 +2,6 @@ package com.getir.readingisgood.order.controller;
 
 import com.getir.readingisgood.order.controller.dto.AddOrderDTO;
 import com.getir.readingisgood.order.controller.dto.OrderDetailDTO;
-import com.getir.readingisgood.order.entity.Order;
 import com.getir.readingisgood.order.service.OrderService;
 import com.getir.readingisgood.order.service.message.OrderMessages;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +14,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/order")
@@ -33,13 +31,12 @@ public class OrderController {
 
     @GetMapping(value = "/getOrderDetail")
     public OrderDetailDTO getOrderDetail(@RequestParam("orderId") @Min(1) Long orderId) {
-        return new OrderDetailDTO(orderService.getOrderById(orderId));
+        return orderService.getOrderDetail(orderId);
     }
 
     @GetMapping(value = "/getOrdersByDate")
     public List<OrderDetailDTO> getOrdersByDate(@RequestParam("startDate") LocalDate startDate, @RequestParam("endDate") LocalDate endDate,
                                                 @RequestParam("pageNum") @Min(0) int pageNum, @RequestParam("pageSize") @Min(1) int pageSize) {
-        List<Order> orders = orderService.getOrdersByDate(startDate, endDate, pageNum, pageSize);
-        return orders.stream().map(OrderDetailDTO::new).collect(Collectors.toList());
+        return orderService.getOrdersByDate(startDate, endDate, pageNum, pageSize);
     }
 }

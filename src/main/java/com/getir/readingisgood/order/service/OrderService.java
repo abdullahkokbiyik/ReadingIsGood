@@ -4,17 +4,20 @@ import com.getir.readingisgood.book.entity.Book;
 import com.getir.readingisgood.book.service.BookService;
 import com.getir.readingisgood.common.annotations.QueryEntityLogger;
 import com.getir.readingisgood.common.annotations.SaveEntityLogger;
+import com.getir.readingisgood.customer.controller.dto.GetOrdersOfCustomerDTO;
+import com.getir.readingisgood.order.controller.dto.OrderDetailDTO;
 import com.getir.readingisgood.order.entity.Order;
 import com.getir.readingisgood.order.repository.OrderRepository;
 import com.getir.readingisgood.order.service.checker.OrderChecker;
 import com.getir.readingisgood.order.service.pojo.GetOrdersByDatePojo;
-import com.getir.readingisgood.order.service.pojo.GetOrdersOfCustomersPojo;
+import com.getir.readingisgood.order.service.pojo.GetOrdersOfCustomerPojo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -26,18 +29,20 @@ public class OrderService {
 
     @Transactional(readOnly = true)
     @QueryEntityLogger
-    public List<Order> getOrdersOfCustomer(Long customerId, int pageNum, int pageSize) {
-        GetOrdersOfCustomersPojo getOrdersOfCustomersPojo = new GetOrdersOfCustomersPojo(customerId, pageNum, pageSize);
-        return orderRepository.getOrdersByCustomerPaginated(getOrdersOfCustomersPojo);
+    public List<GetOrdersOfCustomerDTO> getOrdersOfCustomer(Long customerId, int pageNum, int pageSize) {
+        GetOrdersOfCustomerPojo getOrdersOfCustomerPojo = new GetOrdersOfCustomerPojo(customerId, pageNum, pageSize);
+        List<Order> orders = orderRepository.getOrdersByCustomerPaginated(getOrdersOfCustomerPojo);
+        return orders.stream().map(GetOrdersOfCustomerDTO::new).collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
     @QueryEntityLogger
-    public Order getOrderById(Long id) {
+    public OrderDetailDTO getOrderDetail(Long id) {
         if (orderChecker.checkOrderExists(id)) {
-            return orderRepository.getById(id);
+            Order order = orderRepository.getById(id);
+            return new OrderDetailDTO(order);
         }
-        return new Order();
+        return new OrderDetailDTO();
     }
 
     @Transactional
@@ -54,9 +59,10 @@ public class OrderService {
 
     @Transactional(readOnly = true)
     @QueryEntityLogger
-    public List<Order> getOrdersByDate(LocalDate startDate, LocalDate endDate, int pageNum, int pageSize) {
+    public List<OrderDetailDTO> getOrdersByDate(LocalDate startDate, LocalDate endDate, int pageNum, int pageSize) {
         GetOrdersByDatePojo getOrdersByDatePojo = new GetOrdersByDatePojo(startDate, endDate, pageNum, pageSize);
-        return orderRepository.getByDate(getOrdersByDatePojo);
+        List<Order> orders = orderRepository.getByDate(getOrdersByDatePojo);
+        return orders.stream().map(OrderDetailDTO::new).collect(Collectors.toList());
     }
 
     private void setOrderCost(Order order) {

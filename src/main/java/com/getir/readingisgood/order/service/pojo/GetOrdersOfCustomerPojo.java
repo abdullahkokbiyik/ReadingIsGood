@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class GetOrdersOfCustomersPojo {
+public class GetOrdersOfCustomerPojo {
     private Long customerId;
     private int pageNum;
     private int pageSize;
