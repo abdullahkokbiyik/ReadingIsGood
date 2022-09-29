@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 @Repository
 public class BookRepository {
@@ -22,5 +23,11 @@ public class BookRepository {
 
     public void update(Book book) {
         entityManager.merge(book);
+    }
+
+    public Book getByUniqueIndex(String uniqueIndex) {
+        TypedQuery<Book> query = entityManager.createQuery("select b from Book b where b.uniqueIndex = :uniqueIndex ", Book.class);
+        query.setParameter("uniqueIndex", uniqueIndex);
+        return query.getResultList().stream().findFirst().orElse(null);
     }
 }

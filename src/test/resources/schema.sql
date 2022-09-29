@@ -7,7 +7,7 @@ create table if not exists author
     nationality varchar(50)  not null,
     uid         varchar(38)  not null
 );
-create unique index ui_author_uid
+create unique index if not exists ui_author_uid
     on author (uid);
 
 create table if not exists book
@@ -22,7 +22,7 @@ create table if not exists book
             references author,
     uid          varchar(38)      not null
 );
-create unique index ui_book_uid
+create unique index if not exists ui_book_uid
     on book (uid);
 
 create table if not exists customer
@@ -32,7 +32,7 @@ create table if not exists customer
     customer_name varchar(128) not null,
     email         varchar(200) not null
 );
-create unique index ui_customer_email
+create unique index if not exists ui_customer_email
     on customer (email);
 
 create table if not exists customer_order
