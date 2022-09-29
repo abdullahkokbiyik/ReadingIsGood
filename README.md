@@ -123,6 +123,3 @@ http://localhost:8080/readingisgood/swagger-ui.html#/
 ```
 Note that application must be up and running to see this documentation page.
 
-# Redis
-
-To avoid data inconsistency in stock management, Redis is used for locking records. Redis is working in-memory and independently from transactional context so that it is working fast.
